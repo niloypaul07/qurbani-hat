@@ -1,10 +1,10 @@
-import { Ubuntu } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const ubuntu = Ubuntu({
+const outfit = Outfit({
   weight: ["400", "700"],
   subsets: ["latin"],
-  variable: "--font-ubuntu",
+  variable: "--font-poppins",
 });
 
 export const metadata = {
@@ -15,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light" suppressHydrationWarning>
-      <body className={`${ubuntu.className} min-h-full flex flex-col`}>
+      <body className={`${outfit.className} min-h-full flex flex-col`}>
         {children}
       </body>
     </html>

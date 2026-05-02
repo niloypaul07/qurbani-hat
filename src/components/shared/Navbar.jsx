@@ -19,9 +19,7 @@ const Navbar = () => {
         const getSession = async () => {
             try {
                 const { data: session } = await authClient.getSession();
-                if (session?.user) {
-                    setUser(session.user);
-                }
+                if (session?.user) setUser(session.user);
             } catch (err) {
                 console.error(err);
             } finally {
@@ -39,17 +37,12 @@ const Navbar = () => {
             setShowAvatar(true);
             timeoutId = setTimeout(() => {
                 setShowAvatar(false);
-                timeoutId = setTimeout(() => {
-                    startCycle();
-                }, 2000);
+                timeoutId = setTimeout(startCycle, 2000);
             }, 3000);
         };
 
         startCycle();
-
-        return () => {
-            if (timeoutId) clearTimeout(timeoutId);
-        };
+        return () => clearTimeout(timeoutId);
     }, [user]);
 
     const handleLogout = async () => {
@@ -63,40 +56,40 @@ const Navbar = () => {
         }
     };
 
-    const closeMenu = () => setOpen(false);
+    const getLinkClass = (path) =>
+        `text-base font-medium transition ${
+            pathname === path
+                ? "text-purple-600"
+                : "text-slate-700 hover:text-purple-500"
+        }`;
 
-    const getLinkClass = (path) => {
-        return `text-base font-medium transition-colors duration-200 ${pathname === path
-            ? "text-red-500"
-            : "text-white hover:text-emerald-400"
-            }`;
-    };
-
-    const getMobileLinkClass = (path) => {
-        return `block py-2 text-base transition-colors duration-200 ${pathname === path
-            ? "text-red-500 font-semibold"
-            : "text-white hover:text-emerald-400"
-            }`;
-    };
+    const getMobileLinkClass = (path) =>
+        `block py-2 text-base ${
+            pathname === path
+                ? "text-purple-600 font-semibold"
+                : "text-slate-700 hover:text-purple-500"
+        }`;
 
     return (
-        <nav className="bg-slate-950 text-white border-b border-slate-800 sticky top-0 z-50">
+        <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 md:px-8">
-                <div className="flex items-center justify-between h-20 md:h-24">
+                <div className="flex items-center justify-between h-20">
 
+                    {/* Logo */}
                     <Link href="/" className="flex items-center gap-3">
                         <Image
                             src={logo}
                             alt="QurbaniHat Logo"
                             width={50}
                             height={50}
-                            className="rounded-full md:w-[55px] md:h-[55px]"
+                            className="rounded-full"
                         />
-                        <h2 className="text-xl md:text-2xl font-extrabold color-white">
+                        <h2 className="text-xl md:text-2xl font-extrabold text-slate-800">
                             QurbaniHat
                         </h2>
                     </Link>
 
+                    {/* Menu */}
                     <div className="hidden md:flex items-center gap-10">
                         <Link href="/" className={getLinkClass("/")}>
                             Home
@@ -106,47 +99,48 @@ const Navbar = () => {
                         </Link>
                     </div>
 
+                    {/* Auth */}
                     <div className="hidden md:flex items-center gap-4">
                         {isSessionLoading ? (
-                            <div className="flex items-center gap-3">
-                                <div className="w-11 h-11 bg-slate-800 rounded-full animate-pulse" />
-                                <div className="w-20 h-9 bg-slate-800 rounded-lg animate-pulse" />
+                            <div className="flex gap-3">
+                                <div className="w-10 h-10 bg-slate-200 rounded-full animate-pulse" />
+                                <div className="w-20 h-9 bg-slate-200 rounded-lg animate-pulse" />
                             </div>
                         ) : user ? (
                             <div className="flex items-center gap-3">
                                 <Link href="/my-profile">
-                                    {showAvatar ? (
-                                        <div className="w-11 h-11 rounded-full bg-gradient-to-r from-amber-600 to-amber-400 flex items-center justify-center text-white text-xl shadow-md">
-                                            🐂
-                                        </div>
-                                    ) : (
-                                        <Image
+                                     <Image
                                             src={user?.image || "/avatar.png"}
                                             alt="Profile"
-                                            width={44}
-                                            height={44}
-                                            className="rounded-full border-2 border-slate-700 object-cover w-11 h-11"
+                                            width={25}
+                                            height={15}
+                                            className="rounded-full border border-slate-200"
                                         />
-                                    )}
                                 </Link>
+
+                                {/* Logout */}
                                 <button
                                     onClick={handleLogout}
-                                    className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-sm font-medium"
+                                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium shadow-md hover:scale-105 transition-all"
                                 >
                                     Logout
                                 </button>
                             </div>
                         ) : (
                             <div className="flex items-center gap-3">
+
+                                {/* Login */}
                                 <Link
                                     href="/login"
-                                    className="px-5 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-black font-semibold"
+                                    className="px-5 py-2 rounded-xl border border-purple-300 text-purple-600 font-semibold hover:bg-purple-50 transition"
                                 >
                                     Login
                                 </Link>
+
+                                {/* Register */}
                                 <Link
                                     href="/register"
-                                    className="px-5 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-medium"
+                                    className="px-5 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-md hover:scale-105 transition-all"
                                 >
                                     Register
                                 </Link>
@@ -154,77 +148,46 @@ const Navbar = () => {
                         )}
                     </div>
 
+                    {/* Mobile Toggle */}
                     <button
-                        className="md:hidden text-3xl"
+                        className="md:hidden text-2xl text-purple-500"
                         onClick={() => setOpen(!open)}
                     >
                         ☰
                     </button>
                 </div>
 
+                {/* Mobile */}
                 {open && (
                     <div className="md:hidden pb-5 space-y-3">
-                        <Link
-                            href="/"
-                            onClick={closeMenu}
-                            className={getMobileLinkClass("/")}
-                        >
+                        <Link href="/" onClick={() => setOpen(false)} className={getMobileLinkClass("/")}>
                             Home
                         </Link>
-                        <Link
-                            href="/animals"
-                            onClick={closeMenu}
-                            className={getMobileLinkClass("/animals")}
-                        >
+
+                        <Link href="/animals" onClick={() => setOpen(false)} className={getMobileLinkClass("/animals")}>
                             All Animals
                         </Link>
 
-                        <div className="pt-3 border-t border-slate-800">
-                            {isSessionLoading ? (
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-slate-800 rounded-full animate-pulse" />
-                                    <div className="w-20 h-8 bg-slate-800 rounded animate-pulse" />
-                                </div>
-                            ) : user ? (
-                                <div className="flex items-center gap-3">
-                                    <Link href="/my-profile">
-                                        {showAvatar ? (
-                                            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-600 to-amber-400 flex items-center justify-center text-white text-base">
-                                                🐂
-                                            </div>
-                                        ) : (
-                                            <Image
-                                                src={user?.image || "/avatar.png"}
-                                                alt="User"
-                                                width={40}
-                                                height={40}
-                                                className="rounded-full border border-slate-700 object-cover w-10 h-10"
-                                            />
-                                        )}
-                                    </Link>
-                                    <button
-                                        onClick={() => {
-                                            handleLogout();
-                                            closeMenu();
-                                        }}
-                                        className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-sm"
-                                    >
-                                        Logout
-                                    </button>
-                                </div>
+                        <div className="pt-3 border-t border-slate-200">
+                            {user ? (
+                                <button
+                                    onClick={handleLogout}
+                                    className="w-full px-4 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm"
+                                >
+                                    Logout
+                                </button>
                             ) : (
                                 <div className="flex flex-col gap-2">
                                     <Link
                                         href="/login"
-                                        onClick={closeMenu}
-                                        className="px-4 py-2 rounded-lg bg-amber-500 text-black font-semibold text-sm text-center"
+                                        className="px-4 py-2 rounded-xl border border-purple-300 text-purple-600 text-center"
                                     >
                                         Login
                                     </Link>
+
                                     <Link
                                         href="/register"
-                                        onClick={closeMenu}
-                                        className="px-4 py-2 rounded-lg bg-emerald-500 text-white font-medium text-sm text-center"
+                                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-center"
                                     >
                                         Register
                                     </Link>

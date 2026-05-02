@@ -5,6 +5,8 @@ import Navbar from "@/components/shared/Navbar";
 import HeroSection from "@/components/homepage/HeroSection";
 import ExtraSection from "@/components/homepage/ExtraSection";
 import FeaturedAnimals from "@/components/homepage/FeaturedAnimals";
+import QurbaniTips from "@/components/homepage/QurbaniTips";
+import TopBreeds from "@/components/homepage/TopBreeds";
 
 export default function Home() {
   return (
@@ -12,7 +14,8 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <FeaturedAnimals />
-      <ExtraSection />
+      <QurbaniTips></QurbaniTips>
+      <TopBreeds></TopBreeds>
       <Footer />
     </div>
   );
