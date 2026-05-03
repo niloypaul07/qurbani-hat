@@ -1,37 +1,61 @@
+"use client";
+
 import Link from "next/link";
+import { Home, SearchX, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white px-4">
+        <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden px-4">
 
-            <div className="text-center max-w-xl">
+            {/* Background Glow */}
+            <div className="absolute top-[-120px] left-[-120px] w-[300px] h-[300px] bg-linear-to-r from-purple-600 to-pink-500 opacity-20 blur-[120px] rounded-full"></div>
+            <div className="absolute bottom-[-120px] right-[-120px] w-[300px] h-[300px] bg-linear-to-r from-pink-500 to-purple-600 opacity-20 blur-[120px] rounded-full"></div>
 
-                <h1 className="text-[6rem] md:text-[10rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-400 animate-pulse">
+            {/* Card */}
+            <div className="relative z-10 max-w-lg w-full bg-white border border-slate-200 shadow-xl rounded-3xl p-8 text-center">
+
+                {/* Icon */}
+                <div className="flex justify-center mb-6">
+                    <div className="w-20 h-20 rounded-2xl bg-linear-to-r from-purple-600 to-pink-500 flex items-center justify-center shadow-lg">
+                        <SearchX size={36} className="text-white" />
+                    </div>
+                </div>
+
+                {/* Title */}
+                <h1 className="text-6xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                     404
                 </h1>
 
-                <h2 className="text-2xl md:text-4xl font-bold mt-2">
+                <h2 className="text-2xl font-bold text-slate-800 mt-2">
                     Page Not Found
                 </h2>
 
-                <p className="text-gray-300 mt-3 text-sm md:text-base">
-                    Sorry, the page you are looking for doesn’t exist or has been moved.
+                <p className="text-slate-500 mt-3 text-sm">
+                    The page you are looking for doesn’t exist or has been moved.
                 </p>
 
-                <Link
-                    href="/"
-                    className="inline-block mt-6 px-6 py-3 rounded-full bg-pink-500 hover:bg-pink-600 transition font-semibold shadow-lg"
-                >
-                    Go Back Home
-                </Link>
+                {/* Buttons */}
+                <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
 
-                <div className="mt-10 flex justify-center gap-6">
-                    <div className="w-20 h-20 md:w-28 md:h-28 bg-pink-500/20 blur-2xl rounded-full"></div>
-                    <div className="w-20 h-20 md:w-28 md:h-28 bg-yellow-400/20 blur-2xl rounded-full"></div>
+                    <Link
+                        href="/"
+                        className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold hover:opacity-90 transition"
+                    >
+                        <Home size={18} />
+                        Go Home
+                    </Link>
+
+                    <button
+                        onClick={() => window.history.back()}
+                        className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 transition font-medium"
+                    >
+                        <ArrowLeft size={18} />
+                        Go Back
+                    </button>
+
                 </div>
 
             </div>
-
         </div>
     );
 }
