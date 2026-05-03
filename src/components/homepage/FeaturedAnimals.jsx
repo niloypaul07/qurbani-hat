@@ -47,12 +47,12 @@ const FeaturedAnimals = () => {
 
                 {/* Header */}
                 <div className="text-center mb-14">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 animate__animated animate__fadeInDown">
                         Featured{" "}
-                        <span className="text-purple-600">Animals</span>
+                        <span className="text-purple-600 animate__animated animate__fadeInDown">Animals</span>
                     </h2>
 
-                    <p className="text-slate-600 mt-3 text-sm">
+                    <p className="text-slate-600 mt-3 text-sm animate__animated animate__fadeInDown">
                         Handpicked healthy animals for your Qurbani
                     </p>
                 </div>

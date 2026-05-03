@@ -44,7 +44,7 @@ const HeroSection = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-10 items-center">
 
         {/* LEFT CONTENT */}
-        <div>
+        <div className="animate__animated animate__fadeInLeft">
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 text-purple-600 text-xs font-semibold mb-5">
@@ -101,7 +101,7 @@ const HeroSection = () => {
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative">
+        <div className="relative animate__animated animate__fadeInRight">
 
           {/* Glow Background */}
           <div className="absolute -top-10 -right-10 w-72 h-72 bg-purple-300/30 rounded-full blur-3xl"></div>

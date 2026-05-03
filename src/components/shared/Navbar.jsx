@@ -12,8 +12,7 @@ const Navbar = () => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [user, setUser] = useState(null);
-    const [showAvatar, setShowAvatar] = useState(true);
-    const [isSessionLoading, setIsSessionLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getSession = async () => {
@@ -23,179 +22,158 @@ const Navbar = () => {
             } catch (err) {
                 console.error(err);
             } finally {
-                setIsSessionLoading(false);
+                setLoading(false);
             }
         };
         getSession();
     }, []);
 
-    useEffect(() => {
-        if (!user) return;
-        let timeoutId;
-
-        const startCycle = () => {
-            setShowAvatar(true);
-            timeoutId = setTimeout(() => {
-                setShowAvatar(false);
-                timeoutId = setTimeout(startCycle, 2000);
-            }, 3000);
-        };
-
-        startCycle();
-        return () => clearTimeout(timeoutId);
-    }, [user]);
-
     const handleLogout = async () => {
-        try {
-            await authClient.signOut();
-            setUser(null);
-            router.push("/");
-            router.refresh();
-        } catch (err) {
-            console.error("Logout failed:", err);
-        }
+        await authClient.signOut();
+        setUser(null);
+        router.push("/");
+        router.refresh();
     };
 
-    const getLinkClass = (path) =>
-        `text-base font-medium transition ${
-            pathname === path
-                ? "text-purple-600"
-                : "text-slate-700 hover:text-purple-500"
-        }`;
-
-    const getMobileLinkClass = (path) =>
-        `block py-2 text-base ${
-            pathname === path
-                ? "text-purple-600 font-semibold"
-                : "text-slate-700 hover:text-purple-500"
-        }`;
-
     return (
-        <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <nav className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
             <div className="max-w-7xl mx-auto px-4 md:px-8">
+
                 <div className="flex items-center justify-between h-20">
 
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3">
                         <Image
                             src={logo}
-                            alt="QurbaniHat Logo"
-                            width={50}
-                            height={50}
+                            alt="QurbaniHat"
+                            width={48}
+                            height={48}
                             className="rounded-full"
                         />
-                        <h2 className="text-xl md:text-2xl font-extrabold text-slate-800">
+                        <h1 className="text-xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                             QurbaniHat
-                        </h2>
+                        </h1>
                     </Link>
 
-                    {/* Menu */}
-                    <div className="hidden md:flex items-center gap-10">
-                        <Link href="/" className={getLinkClass("/")}>
+                    {/* Desktop Menu */}
+                    <div className="hidden md:flex items-center gap-8">
+                        <Link href="/" className={`font-medium ${pathname === "/" ? "text-purple-600" : "text-slate-700"}`}>
                             Home
                         </Link>
-                        <Link href="/animals" className={getLinkClass("/animals")}>
+
+                        <Link href="/animals" className={`font-medium ${pathname === "/animals" ? "text-purple-600" : "text-slate-700"}`}>
                             All Animals
                         </Link>
                     </div>
 
-                    {/* Auth */}
+                    {/* Desktop Auth */}
                     <div className="hidden md:flex items-center gap-4">
-                        {isSessionLoading ? (
-                            <div className="flex gap-3">
-                                <div className="w-10 h-10 bg-slate-200 rounded-full animate-pulse" />
-                                <div className="w-20 h-9 bg-slate-200 rounded-lg animate-pulse" />
-                            </div>
+
+                        {loading ? (
+                            <div className="w-20 h-9 bg-slate-200 animate-pulse rounded-lg" />
                         ) : user ? (
                             <div className="flex items-center gap-3">
-                                <Link href="/my-profile">
-                                     <Image
-                                            src={user?.image || "/avatar.png"}
-                                            alt="Profile"
-                                            width={20}
-                                            height={20}
-                                            className="rounded-full border border-slate-200"
-                                        />
+
+                                {/* PROFILE AVATAR (FIXED SIZE) */}
+                                <Link href="/my-profile" className="flex gap-2 items-center" >
+                                    <Image
+                                        src={user?.image || "/avatar.png"}
+                                        alt="profile"
+                                        width={40}
+                                        height={40}
+                                        className="rounded-full border-2 border-purple-500 object-cover cursor-pointer"
+                                    />
+                                    <span className="font-medium text-slate-700">
+                                    My Profile
+                                </span>
                                 </Link>
 
-                                {/* Logout */}
                                 <button
                                     onClick={handleLogout}
-                                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium shadow-md hover:scale-105 transition-all"
+                                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm font-semibold hover:opacity-90 transition"
                                 >
                                     Logout
                                 </button>
                             </div>
                         ) : (
-                            <div className="flex items-center gap-3">
-
-                                {/* Login */}
-                                <Link
-                                    href="/login"
-                                    className="px-5 py-2 rounded-xl border border-purple-300 text-purple-600 font-semibold hover:bg-purple-50 transition"
-                                >
+                            <div className="flex gap-3">
+                                <Link href="/login" className="px-4 py-2 border rounded-xl text-purple-600 border-purple-300">
                                     Login
                                 </Link>
 
-                                {/* Register */}
-                                <Link
-                                    href="/register"
-                                    className="px-5 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-md hover:scale-105 transition-all"
-                                >
+                                <Link href="/register" className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white">
                                     Register
                                 </Link>
                             </div>
                         )}
+
                     </div>
 
-                    {/* Mobile Toggle */}
+                    {/* Mobile Button */}
                     <button
-                        className="md:hidden text-2xl text-purple-500"
                         onClick={() => setOpen(!open)}
+                        className="md:hidden text-3xl text-purple-600"
                     >
                         ☰
                     </button>
                 </div>
 
-                {/* Mobile */}
+                {/* Mobile Menu */}
                 {open && (
-                    <div className="md:hidden pb-5 space-y-3">
-                        <Link href="/" onClick={() => setOpen(false)} className={getMobileLinkClass("/")}>
+                    <div className="md:hidden pb-5 space-y-4 border-t border-slate-200 pt-4">
+
+                        <Link href="/" onClick={() => setOpen(false)} className="block text-slate-700">
                             Home
                         </Link>
 
-                        <Link href="/animals" onClick={() => setOpen(false)} className={getMobileLinkClass("/animals")}>
-                            All Animals
+                        <Link href="/animals" onClick={() => setOpen(false)} className="block text-slate-700">
+                            Animals
                         </Link>
 
-                        <div className="pt-3 border-t border-slate-200">
-                            {user ? (
-                                <button
-                                    onClick={handleLogout}
-                                    className="w-full px-4 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm"
-                                >
-                                    Logout
-                                </button>
-                            ) : (
-                                <div className="flex flex-col gap-2">
-                                    <Link
-                                        href="/login"
-                                        className="px-4 py-2 rounded-xl border border-purple-300 text-purple-600 text-center"
-                                    >
-                                        Login
-                                    </Link>
+                        {/* MOBILE PROFILE (FIXED) */}
+                        {user && (
+                            <Link
+                                href="/my-profile"
+                                onClick={() => setOpen(false)}
+                                className="flex items-center gap-3 py-2"
+                            >
+                                <Image
+                                    src={user?.image || "/avatar.png"}
+                                    alt="profile"
+                                    width={45}
+                                    height={45}
+                                    className="rounded-full border-2 border-purple-500"
+                                />
 
-                                    <Link
-                                        href="/register"
-                                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-center"
-                                    >
-                                        Register
-                                    </Link>
-                                </div>
-                            )}
-                        </div>
+                                <span className="font-medium text-slate-700">
+                                    My Profile
+                                </span>
+                            </Link>
+                        )}
+
+                        {/* Auth Buttons */}
+                        {user ? (
+                            <button
+                                onClick={handleLogout}
+                                className="w-full px-4 py-2 rounded-xl bg-linear-to-r from-purple-600 to-pink-500 text-white"
+                            >
+                                Logout
+                            </button>
+                        ) : (
+                            <div className="flex flex-col gap-2">
+                                <Link href="/login" className="px-4 py-2 border rounded-xl text-center text-purple-600">
+                                    Login
+                                </Link>
+
+                                <Link href="/register" className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white text-center">
+                                    Register
+                                </Link>
+                            </div>
+                        )}
+
                     </div>
                 )}
+
             </div>
         </nav>
     );

@@ -33,10 +33,10 @@ const TopBreeds = () => {
 
         {/* Header */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800">
-            Top <span className="text-purple-600">Breeds</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 animate__animated animate__fadeInDown">
+            Top <span className="text-purple-600 animate__animated animate__fadeInDown">Breeds</span>
           </h2>
-          <p className="text-slate-600 mt-3 text-sm md:text-base">
+          <p className="text-slate-600 mt-3 text-sm md:text-base animate__animated animate__fadeInDown">
             Explore the most popular and trusted Qurbani animal breeds
           </p>
         </div>
