@@ -1,10 +1,12 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 
 const outfit = Outfit({
   weight: ["400", "700"],
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-outfit",
 });
 
 export const metadata = {
@@ -15,11 +17,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
-      <body className={`${outfit.className} min-h-full flex flex-col`}>
-        <main>
+      <body className={`${outfit.className} min-h-screen flex flex-col bg-white`}>
+
+       
           {children}
-        </main>
-        
+          
+      
+
       </body>
     </html>
   );

@@ -99,7 +99,7 @@ const LoginPage = () => {
 
                 {/* Header */}
                 <div className="text-center mb-6">
-                    <h1 className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-extrabold bg-linear-to-r from-purple-600 via-pink-500 to-indigo-600 bg-clip-text text-transparent">
                         Welcome Back
                     </h1>
                     <p className="text-slate-500 text-sm mt-1">
@@ -156,7 +156,7 @@ const LoginPage = () => {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 hover:opacity-90 transition"
+                        className="w-full py-3 rounded-xl text-white font-semibold bg-linear-to-r from-purple-600 via-pink-500 to-indigo-600 hover:opacity-90 transition"
                     >
                         {isLoading ? "Logging in..." : "Login"}
                     </button>

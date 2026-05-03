@@ -10,12 +10,13 @@ import TopBreeds from "@/components/homepage/TopBreeds";
 export default function Home() {
   return (
     <div>
-      <Navbar />
+      <Navbar></Navbar>
       <HeroSection />
       <FeaturedAnimals />
       <QurbaniTips></QurbaniTips>
       <TopBreeds></TopBreeds>
-      <Footer />
+      <Footer></Footer>
+      
     </div>
   );
 }
