@@ -3,244 +3,186 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/assets/logo.jpg";
-import { FaShieldAlt, FaTruck, FaHandshake, FaUsers, FaArrowRight, FaCheckCircle } from "react-icons/fa";
+import {
+    FaShieldAlt,
+    FaTruck,
+    FaHandshake,
+    FaUsers,
+    FaArrowRight,
+    FaCheckCircle
+} from "react-icons/fa";
 
 const AboutPage = () => {
-    const values = [
-        {
-            icon: FaShieldAlt,
-            title: "Trusted Sellers",
-            desc: "Every seller is reviewed to ensure quality livestock and honest service.",
-        },
-        {
-            icon: FaHandshake,
-            title: "Fair Deals",
-            desc: "Transparent pricing so buyers can compare and choose confidently.",
-        },
-        {
-            icon: FaTruck,
-            title: "Easy Delivery",
-            desc: "Smooth communication and delivery support for stress-free booking.",
-        },
-        {
-            icon: FaUsers,
-            title: "Customer Care",
-            desc: "Friendly support team ready to help whenever you need us.",
-        },
-    ];
 
     const stats = [
-        { number: "500+", label: "Animals Listed" },
-        { number: "100+", label: "Trusted Sellers" },
-        { number: "5K+", label: "Happy Visitors" },
+        { number: "500+", label: "Animals" },
+        { number: "100+", label: "Sellers" },
+        { number: "5K+", label: "Users" },
         { number: "24/7", label: "Support" },
     ];
 
+    const features = [
+        {
+            icon: FaShieldAlt,
+            title: "Verified Platform",
+            desc: "All sellers and listings are verified for safety and trust."
+        },
+        {
+            icon: FaHandshake,
+            title: "Fair Pricing",
+            desc: "Transparent pricing with no hidden cost or manipulation."
+        },
+        {
+            icon: FaTruck,
+            title: "Fast Process",
+            desc: "Smooth booking and delivery coordination system."
+        },
+        {
+            icon: FaUsers,
+            title: "Human Support",
+            desc: "Real people ready to help you anytime."
+        },
+    ];
+
     return (
-        <section className="bg-slate-950 text-white overflow-hidden">
+        <section className="min-h-screen bg-white text-slate-800">
 
-            <div className="relative border-b border-slate-800">
-                <div className="absolute -top-20 left-0 w-72 h-72 bg-emerald-500/20 blur-3xl rounded-full"></div>
-                <div className="absolute bottom-0 right-0 w-80 h-80 bg-amber-500/20 blur-3xl rounded-full"></div>
+            {/* HERO */}
+            <div className="relative overflow-hidden">
 
-                <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-10 py-20 relative z-10">
-                    <div className="grid lg:grid-cols-2 gap-14 items-center">
+                {/* background glow */}
+                <div className="absolute -top-40 -left-40 w-[400px] h-[400px] bg-purple-500/20 blur-[120px]" />
+                <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-pink-500/20 blur-[120px]" />
 
-                        <div>
-                            <p className="inline-block px-4 py-2 rounded-full bg-slate-900 text-amber-400 text-sm font-medium mb-5 border border-slate-800">
-                                About QurbaniHat
-                            </p>
+                <div className="max-w-7xl mx-auto px-6 md:px-10 py-24 grid lg:grid-cols-2 gap-14 items-center">
 
-                            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
-                                A Smarter Way to Buy{" "}
-                                <span className="bg-gradient-to-r from-emerald-400 to-lime-300 bg-clip-text text-transparent">
-                                    Qurbani Animals
-                                </span>
-                            </h1>
+                    {/* LEFT */}
+                    <div>
 
-                            <p className="mt-6 text-slate-300 text-lg leading-8 max-w-xl">
-                                QurbaniHat is a modern livestock marketplace built
-                                to connect buyers with trusted sellers across
-                                Bangladesh. We make your Qurbani easier, safer,
-                                and faster.
-                            </p>
+                        <span className="px-4 py-2 text-sm rounded-full bg-purple-50 text-purple-700 font-medium">
+                            About QurbaniHat
+                        </span>
 
-                            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                                <Link
-                                    href="/animals"
-                                    className="px-8 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-black font-semibold transition shadow-lg hover:scale-105 text-center"
-                                >
-                                    Browse Animals
-                                </Link>
+                        <h1 className="text-4xl md:text-6xl font-extrabold mt-5 leading-tight">
+                            Smarter Way to Buy{" "}
+                            <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                                Qurbani Animals
+                            </span>
+                        </h1>
 
-                                <Link
-                                    href="/"
-                                    className="px-8 py-3 rounded-xl border border-slate-700 hover:border-emerald-400 hover:text-emerald-400 transition font-semibold text-center"
-                                >
-                                    Contact Info
-                                </Link>
-                            </div>
+                        <p className="mt-6 text-slate-600 text-lg leading-8">
+                            A modern livestock marketplace that connects buyers
+                            with trusted sellers across Bangladesh with speed,
+                            trust, and simplicity.
+                        </p>
+
+                        <div className="mt-8 flex gap-4 flex-wrap">
+                            <Link
+                                href="/animals"
+                                className="px-7 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold hover:opacity-90 transition"
+                            >
+                                Browse Animals
+                            </Link>
+
+                            <Link
+                                href="/"
+                                className="px-7 py-3 rounded-xl border border-slate-200 hover:border-purple-500 hover:text-purple-600 transition"
+                            >
+                                Contact Us
+                            </Link>
                         </div>
-
-                        <div className="relative">
-                            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 shadow-2xl">
-                                <img
-                                    src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1000&q=80"
-                                    alt="Farm"
-                                    className="rounded-3xl w-full h-[430px] object-cover"
-                                />
-                            </div>
-
-                            <div className="absolute -bottom-5 -left-5 bg-slate-900 border border-slate-800 rounded-2xl px-5 py-4 shadow-xl">
-                                <p className="text-2xl font-bold text-emerald-400">
-                                    100%
-                                </p>
-                                <p className="text-sm text-slate-400">
-                                    Trusted Platform
-                                </p>
-                            </div>
-
-                            <div className="absolute -top-5 -right-5 bg-amber-500 text-black px-5 py-3 rounded-2xl font-bold shadow-xl">
-                                Since 2026
-                            </div>
-                        </div>
-
                     </div>
-                </div>
-            </div>
 
-            <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-10 py-14">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-                    {stats.map((item, index) => (
-                        <div
-                            key={index}
-                            className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center hover:border-emerald-500 transition"
-                        >
-                            <h3 className="text-3xl font-bold text-emerald-400">
-                                {item.number}
-                            </h3>
-                            <p className="text-slate-400 mt-2 text-sm">
-                                {item.label}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <div className="bg-slate-900 border-y border-slate-800">
-                <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-10 py-20">
-                    <div className="grid lg:grid-cols-2 gap-14 items-center">
-
-                        <div>
-                            <p className="text-amber-400 text-sm font-medium uppercase mb-3">
-                                Our Story
-                            </p>
-
-                            <h2 className="text-3xl md:text-5xl font-bold leading-tight">
-                                Built for Simplicity, Trust & Quality
-                            </h2>
-
-                            <p className="mt-6 text-slate-300 leading-8">
-                                Traditional livestock buying often takes time,
-                                effort, and uncertainty. QurbaniHat was created
-                                to modernize the experience with digital
-                                convenience and seller transparency.
-                            </p>
-
-                            <div className="mt-8 space-y-4">
-                                {[
-                                    "Verified animals from real sellers",
-                                    "Easy browsing and booking",
-                                    "Reliable support before purchase",
-                                    "Simple experience on all devices",
-                                ].map((item, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex items-center gap-3"
-                                    >
-                                        <FaCheckCircle className="text-emerald-400" />
-                                        <span className="text-slate-300">
-                                            {item}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="flex items-center justify-center bg-slate-900 border border-slate-800 rounded-3xl h-[430px] shadow-2xl">
-                            <Image
-                                src={logo}
-                                alt="QurbaniHat Logo"
-                                width={300}
-                                height={300}
-                                className="object-contain rounded-full"
+                    {/* RIGHT IMAGE */}
+                    <div className="relative">
+                        <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-100">
+                            <img
+                                src="https://images.pexels.com/photos/32401115/pexels-photo-32401115.jpeg"
+                                className="w-full h-[420px] object-cover"
                             />
                         </div>
+
+                        {/* floating badge */}
+                        <div className="absolute -bottom-6 left-6 bg-white shadow-xl border rounded-2xl px-5 py-3">
+                            <p className="text-purple-600 font-bold text-lg">100% Trusted</p>
+                            <p className="text-xs text-slate-500">Verified Sellers</p>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-10 py-20">
-                <div className="text-center mb-14">
-                    <p className="text-amber-400 text-sm font-medium uppercase mb-3">
-                        Why Choose Us
-                    </p>
-
-                    <h2 className="text-3xl md:text-5xl font-bold">
-                        Designed Around Buyers
-                    </h2>
-
-                    <p className="text-slate-400 mt-4 max-w-2xl mx-auto leading-8">
-                        We focus on trust, simplicity, and quality so your
-                        Qurbani experience feels easy from start to finish.
-                    </p>
-                </div>
-
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {values.map((item, index) => {
-                        const Icon = item.icon;
-
-                        return (
-                            <div
-                                key={index}
-                                className="bg-slate-900 border border-slate-800 rounded-3xl p-7 hover:-translate-y-2 hover:border-emerald-500 transition duration-300"
-                            >
-                                <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-5">
-                                    <Icon />
-                                </div>
-
-                                <h3 className="text-xl font-bold mb-3">
-                                    {item.title}
-                                </h3>
-
-                                <p className="text-slate-400 leading-7 text-sm">
-                                    {item.desc}
-                                </p>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-
-            <div className="border-t border-slate-800">
-                <div className="max-w-5xl mx-auto px-4 md:px-8 py-20 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold leading-tight">
-                        Ready to Find the Right Animal?
-                    </h2>
-
-                    <p className="text-slate-400 mt-5 max-w-2xl mx-auto leading-8">
-                        Explore quality livestock from trusted sellers and enjoy
-                        a smoother Qurbani buying experience today.
-                    </p>
-
-                    <Link
-                        href="/animals"
-                        className="inline-flex items-center gap-3 mt-8 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-black font-bold transition shadow-lg hover:scale-105"
+            {/* STATS */}
+            <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+                {stats.map((s, i) => (
+                    <div
+                        key={i}
+                        className="bg-white border rounded-2xl p-6 text-center shadow-sm hover:shadow-lg transition"
                     >
-                        Browse Animals
-                        <FaArrowRight />
-                    </Link>
+                        <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                            {s.number}
+                        </h2>
+                        <p className="text-slate-500 mt-2 text-sm">{s.label}</p>
+                    </div>
+                ))}
+            </div>
+
+            {/* FEATURES */}
+            <div className="bg-slate-50 py-20">
+                <div className="max-w-7xl mx-auto px-6 md:px-10">
+
+                    <div className="text-center mb-14">
+                        <h2 className="text-3xl md:text-5xl font-bold">
+                            Why Choose Us
+                        </h2>
+                        <p className="text-slate-500 mt-4 max-w-2xl mx-auto">
+                            Built for trust, simplicity and a better buying experience
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {features.map((f, i) => {
+                            const Icon = f.icon;
+                            return (
+                                <div
+                                    key={i}
+                                    className="bg-white border rounded-3xl p-6 hover:-translate-y-2 transition shadow-sm"
+                                >
+                                    <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white bg-gradient-to-r from-purple-600 to-pink-500 mb-4">
+                                        <Icon />
+                                    </div>
+
+                                    <h3 className="font-bold text-lg mb-2">{f.title}</h3>
+                                    <p className="text-sm text-slate-500 leading-6">
+                                        {f.desc}
+                                    </p>
+                                </div>
+                            );
+                        })}
+                    </div>
+
                 </div>
             </div>
+
+            {/* CTA */}
+            <div className="max-w-5xl mx-auto text-center py-24 px-6">
+                <h2 className="text-3xl md:text-5xl font-bold">
+                    Ready to explore animals?
+                </h2>
+
+                <p className="text-slate-500 mt-5">
+                    Start your Qurbani journey with trusted sellers today.
+                </p>
+
+                <Link
+                    href="/animals"
+                    className="inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold hover:opacity-90 transition"
+                >
+                    Browse Now
+                    <FaArrowRight />
+                </Link>
+            </div>
+
         </section>
     );
 };

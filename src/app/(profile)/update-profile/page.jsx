@@ -4,7 +4,17 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { User, Image as ImageIcon, Save, X, ArrowLeft, Loader2, Edit3, CheckCircle, AlertCircle } from "lucide-react";
+import {
+    User,
+    Image as ImageIcon,
+    Save,
+    X,
+    ArrowLeft,
+    Loader2,
+    Edit3,
+    CheckCircle,
+    AlertCircle
+} from "lucide-react";
 
 const UpdateProfilePage = () => {
     const router = useRouter();
@@ -38,61 +48,13 @@ const UpdateProfilePage = () => {
             setOldName(session.user.name || "");
             setOldImage(session.user.image || "");
 
-            if (session.user.image) {
-                validateImage(session.user.image);
-            }
-
             setLoading(false);
         };
 
         getSession();
     }, [router]);
 
-    const validateImage = (url) => {
-        if (!url || url.trim() === "") {
-            setIsValidImage(false);
-            setIsCheckingImage(false);
-            setImageError("");
-            return false;
-        }
-
-        setIsCheckingImage(true);
-        setImageError("");
-
-        const img = new Image();
-
-        img.onload = () => {
-            setIsValidImage(true);
-            setIsCheckingImage(false);
-            setImageError("");
-        };
-
-        img.onerror = () => {
-            setIsValidImage(false);
-            setIsCheckingImage(false);
-            setImageError("Image not found! Please enter a valid URL.");
-        };
-
-        img.src = url;
-
-        return isValidImage;
-    };
-
-    useEffect(() => {
-        if (image && editMode) {
-            const timer = setTimeout(() => {
-                validateImage(image);
-            }, 500);
-            return () => clearTimeout(timer);
-        }
-    }, [image, editMode]);
-
     const handleSave = async () => {
-        if (image && !isValidImage && !isCheckingImage) {
-            setMessage("Please enter a valid image URL!");
-            return;
-        }
-
         setSaving(true);
         setMessage("");
 
@@ -104,12 +66,12 @@ const UpdateProfilePage = () => {
 
             setOldName(name);
             setOldImage(image);
-
             setEditMode(false);
+
             setMessage("Profile updated successfully!");
-            setTimeout(() => setMessage(""), 3000);
+            setTimeout(() => setMessage(""), 2500);
         } catch (error) {
-            setMessage("Update failed! Please try again.");
+            setMessage("Update failed!");
         } finally {
             setSaving(false);
         }
@@ -120,158 +82,122 @@ const UpdateProfilePage = () => {
         setImage(oldImage);
         setEditMode(false);
         setMessage("");
-        setImageError("");
-        if (oldImage) {
-            validateImage(oldImage);
-        }
     };
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">
-                <Loader2 className="animate-spin" size={24} />
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <Loader2 className="animate-spin text-pink-500" />
             </div>
         );
     }
 
-    const displayImage = editMode ? (image || oldImage || "/avatar.png") : (oldImage || "/avatar.png");
-
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4 py-10">
-            <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div className="min-h-screen bg-white">
 
-                <h1 className="text-2xl font-bold text-white text-center mb-6">
-                    Update Profile
-                </h1>
+            {/* TOP GRADIENT BAR */}
+            <div className="h-2 w-full bg-gradient-to-r from-purple-600 to-pink-500"></div>
 
-                <div className="flex flex-col items-center mb-6">
-                    <img
-                        src={displayImage}
-                        alt="preview"
-                        className="w-20 h-20 rounded-full object-cover"
-                    />
-                    <p className="text-white mt-3 font-semibold">
-                        {editMode ? (name || oldName || "User Name") : (oldName || "User Name")}
-                    </p>
-                </div>
+            <div className="max-w-2xl mx-auto px-4 py-10">
 
-                <div className="space-y-4">
+                {/* BACK */}
+                <Link
+                    href="/my-profile"
+                    className="inline-flex items-center gap-2 text-slate-600 hover:text-pink-600 mb-6"
+                >
+                    <ArrowLeft size={18} />
+                    Back
+                </Link>
 
-                    <div>
-                        <label className="text-sm text-slate-300 mb-2 block">
-                            Full Name
-                        </label>
-                        <div className="relative">
-                            <User
-                                size={16}
-                                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-                            />
-                            <input
-                                type="text"
-                                value={name}
-                                disabled={!editMode}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Enter your full name"
-                                className="w-full pl-10 pr-3 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-70"
-                            />
-                        </div>
+                {/* CARD */}
+                <div className="bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden">
+
+                    {/* HEADER */}
+                    <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-6 text-white text-center">
+                        <h1 className="text-xl font-bold">Update Profile</h1>
+                        <p className="text-sm opacity-90">Edit your account information</p>
                     </div>
 
-                    <div>
-                        <label className="text-sm text-slate-300 mb-2 block">
-                            Profile Picture URL
-                        </label>
-                        <div className="relative">
-                            <ImageIcon
-                                size={16}
-                                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                    <div className="p-6 space-y-5">
+
+                        {/* IMAGE PREVIEW */}
+                        <div className="flex flex-col items-center">
+                            <img
+                                src={image || "/avatar.png"}
+                                className="w-24 h-24 rounded-full border-4 border-pink-200 object-cover"
                             />
-                            <input
-                                type="text"
-                                value={image}
-                                disabled={!editMode}
-                                onChange={(e) => setImage(e.target.value)}
-                                placeholder="https://example.com/photo.jpg"
-                                className={`w-full pl-10 pr-3 py-3 rounded-xl bg-slate-950 border text-white outline-none focus:ring-2 disabled:opacity-70 ${editMode && image && isCheckingImage
-                                    ? "border-yellow-500 focus:ring-yellow-500"
-                                    : editMode && image && isValidImage
-                                        ? "border-emerald-500 focus:ring-emerald-500"
-                                        : editMode && image && imageError
-                                            ? "border-red-500 focus:ring-red-500"
-                                            : "border-slate-700 focus:ring-emerald-500"
-                                    }`}
-                            />
+                            <p className="mt-2 font-semibold text-slate-700">
+                                {name || "Your Name"}
+                            </p>
                         </div>
 
-                        {editMode && image && (
-                            <div className="mt-1.5">
-                                {isCheckingImage ? (
-                                    <p className="text-yellow-400 text-xs flex items-center gap-1">
-                                        <Loader2 size={10} className="animate-spin" /> Checking image...
-                                    </p>
-                                ) : isValidImage ? (
-                                    <p className="text-emerald-400 text-xs flex items-center gap-1">
-                                        <CheckCircle size={10} /> Valid image URL
-                                    </p>
-                                ) : imageError ? (
-                                    <p className="text-red-400 text-xs flex items-center gap-1">
-                                        <AlertCircle size={10} /> {imageError}
-                                    </p>
-                                ) : null}
+                        {/* NAME */}
+                        <div>
+                            <label className="text-sm text-slate-600">Full Name</label>
+                            <div className="relative mt-1">
+                                <User className="absolute left-3 top-3 text-slate-400" size={16} />
+                                <input
+                                    value={name}
+                                    disabled={!editMode}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className="w-full pl-10 pr-3 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-pink-400"
+                                />
+                            </div>
+                        </div>
+
+                        {/* IMAGE */}
+                        <div>
+                            <label className="text-sm text-slate-600">Image URL</label>
+                            <div className="relative mt-1">
+                                <ImageIcon className="absolute left-3 top-3 text-slate-400" size={16} />
+                                <input
+                                    value={image}
+                                    disabled={!editMode}
+                                    onChange={(e) => setImage(e.target.value)}
+                                    className="w-full pl-10 pr-3 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-pink-400"
+                                />
+                            </div>
+                        </div>
+
+                        {/* MESSAGE */}
+                        {message && (
+                            <p className="text-center text-sm text-emerald-600">
+                                {message}
+                            </p>
+                        )}
+
+                        {/* BUTTONS */}
+                        {!editMode ? (
+                            <button
+                                onClick={() => setEditMode(true)}
+                                className="w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 flex items-center justify-center gap-2"
+                            >
+                                <Edit3 size={16} />
+                                Edit Profile
+                            </button>
+                        ) : (
+                            <div className="grid grid-cols-2 gap-3">
+
+                                <button
+                                    onClick={handleSave}
+                                    disabled={saving}
+                                    className="py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center gap-2"
+                                >
+                                    {saving ? <Loader2 className="animate-spin" size={16} /> : <Save size={16} />}
+                                    Save
+                                </button>
+
+                                <button
+                                    onClick={handleCancel}
+                                    className="py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center gap-2"
+                                >
+                                    <X size={16} />
+                                    Cancel
+                                </button>
+
                             </div>
                         )}
                     </div>
-
-                    {message && (
-                        <p className={`text-sm text-center ${message.includes("success") ? "text-emerald-400" : "text-red-400"
-                            }`}>
-                            {message}
-                        </p>
-                    )}
-
-                    {!editMode ? (
-                        <button
-                            onClick={() => {
-                                setEditMode(true);
-                                setImage(oldImage);
-                                setName(oldName);
-                            }}
-                            className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold flex items-center justify-center gap-2 transition"
-                        >
-                            <Edit3 size={16} />
-                            Update Information
-                        </button>
-                    ) : (
-                        <div className="grid grid-cols-2 gap-3">
-                            <button
-                                onClick={handleSave}
-                                disabled={saving || (image && !isValidImage && !isCheckingImage)}
-                                className="py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold flex items-center justify-center gap-2 transition disabled:opacity-50"
-                            >
-                                {saving ? (
-                                    <Loader2 size={16} className="animate-spin" />
-                                ) : (
-                                    <Save size={16} />
-                                )}
-                                Save
-                            </button>
-
-                            <button
-                                onClick={handleCancel}
-                                className="py-3 rounded-xl bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white font-semibold flex items-center justify-center gap-2 transition"
-                            >
-                                <X size={16} />
-                                Cancel
-                            </button>
-                        </div>
-                    )}
-
-                    <Link href="/my-profile">
-                        <button className="w-full mt-2 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center gap-2 transition">
-                            <ArrowLeft size={16} />
-                            Back to Profile
-                        </button>
-                    </Link>
                 </div>
             </div>
         </div>
