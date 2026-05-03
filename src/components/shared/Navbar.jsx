@@ -79,8 +79,8 @@ const Navbar = () => {
                                     <Image
                                         src={user?.image || "/avatar.png"}
                                         alt="profile"
-                                        width={40}
-                                        height={40}
+                                        width={25}
+                                        height={25}
                                         className="rounded-full border-2 border-purple-500 object-cover cursor-pointer"
                                     />
                                     <span className="font-medium text-slate-700">
