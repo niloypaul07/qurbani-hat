@@ -40,7 +40,7 @@ const HeroSection = () => {
     }, []);
 
     return (
-        <section className="bg-[#faf7ff] py-20 md:py-24 overflow-hidden">
+        <section className="bg-white py-20 md:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-10 items-center">
 
         {/* LEFT CONTENT */}
