@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.jpg";
 import { FaShieldAlt, FaTruck, FaHandshake, FaUsers, FaArrowRight, FaCheckCircle } from "react-icons/fa";
 
 const AboutPage = () => {

@@ -3,7 +3,6 @@
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import HeroSection from "@/components/homepage/HeroSection";
-import ExtraSection from "@/components/homepage/ExtraSection";
 import FeaturedAnimals from "@/components/homepage/FeaturedAnimals";
 import QurbaniTips from "@/components/homepage/QurbaniTips";
 import TopBreeds from "@/components/homepage/TopBreeds";

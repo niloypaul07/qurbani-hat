@@ -45,19 +45,18 @@ const Footer = () => {
             </h3>
 
             <div className="space-y-4 text-sm text-slate-600">
-              <div className="flex gap-3">
-                <FaMapMarkerAlt className="text-purple-500 mt-1" />
-                <p>Dhaka, Bangladesh</p>
-              </div>
-
-              <div className="flex gap-3 items-center">
-                <FaPhoneAlt className="text-purple-500" />
-                <p>01673141765</p>
-              </div>
-
+      
               <div className="flex gap-3 items-center">
                 <FaEnvelope className="text-purple-500" />
                 <p>niloypaul81@gmail.com</p>
+              </div>
+              <div className="flex gap-3">
+                <FaMapMarkerAlt className="text-purple-500 mt-1" />
+                <p>Dhaka</p>
+              </div>
+              <div className="flex gap-3 items-center">
+                <FaPhoneAlt className="text-purple-500" />
+                <p>01673141765</p>
               </div>
             </div>
           </div>

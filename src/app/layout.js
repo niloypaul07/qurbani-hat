@@ -14,9 +14,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="light" suppressHydrationWarning>
+    <html lang="en" data-theme="light">
       <body className={`${outfit.className} min-h-full flex flex-col`}>
-        {children}
+        <main>
+          {children}
+        </main>
+        
       </body>
     </html>
   );

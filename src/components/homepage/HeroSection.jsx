@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
 
@@ -39,85 +40,87 @@ const HeroSection = () => {
     }, []);
 
     return (
-        <section className="bg-slate-950 py-15 px-4">
-            <div className="max-w-6xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden relative shadow-xl">
+        <section className="bg-[#faf7ff] py-20 md:py-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-10 items-center">
 
-                <div className="absolute top-0 left-0 w-48 h-48 bg-emerald-500/10 blur-3xl rounded-full"></div>
-                <div className="absolute bottom-0 right-0 w-48 h-48 bg-amber-500/10 blur-3xl rounded-full"></div>
+        {/* LEFT CONTENT */}
+        <div>
 
-                <div className="relative z-10 px-6 py-10 md:px-10 lg:py-12">
-                    <div className="grid md:grid-cols-2 gap-8 items-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 text-purple-600 text-xs font-semibold mb-5">
+            🐂 Trusted Qurbani Platform
+          </div>
 
-                        <div>
-                            <p className="inline-block px-3 py-1.5 rounded-full bg-slate-800 text-amber-400 text-xs font-medium mb-3 border border-slate-700">
-                                Trusted Livestock Marketplace
-                            </p>
+          {/* Heading */}
+          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-800 leading-tight">
+            Book Your{" "}
+            <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+              Qurbani Animal
+            </span>{" "}
+            Easily & Securely
+          </h1>
 
-                            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight text-white">
-                                Find Your Perfect{" "}
-                                <span className="bg-gradient-to-r from-emerald-400 to-lime-300 bg-clip-text text-transparent">
-                                    Qurbani Animal
-                                </span>
-                            </h1>
+          {/* Description */}
+          <p className="text-slate-600 mt-4 text-sm md:text-base max-w-md">
+            Discover healthy and verified livestock for your Qurbani. 
+            Simple booking, trusted sellers, and a hassle-free experience.
+          </p>
 
-                            <p className="mt-4 text-slate-300 text-base leading-6 max-w-xl">
-                                Explore healthy cows, goats, sheep, and premium breeds from verified sellers across Bangladesh.
-                            </p>
+          {/* CTA Buttons */}
+          <div className="flex items-center gap-4 mt-6">
 
-                            <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                                <Link
-                                    href="/animals"
-                                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 transition font-bold text-black text-center shadow-md hover:scale-105"
-                                >
-                                    Browse Animals
-                                </Link>
+            <Link href="/animals">
+              <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-md hover:scale-105 transition-all duration-300">
+                Browse Animals
+              </button>
+            </Link>
 
-                                {!loading && !user && (
-                                    <Link
-                                        href="/register"
-                                        className="px-6 py-3 rounded-xl border border-slate-700 text-white hover:bg-slate-800 transition font-semibold text-center"
-                                    >
-                                        Join Now
-                                    </Link>
-                                )}
-                            </div>
+            <Link href="/register">
+              <button className="px-6 py-3 rounded-xl border border-purple-300 text-purple-600 font-semibold hover:bg-purple-50 transition">
+                Get Started
+              </button>
+            </Link>
 
-                            <div className="grid grid-cols-3 gap-4 mt-8 max-w-sm">
-                                <div>
-                                    <h3 className="text-xl font-bold text-emerald-400">
-                                        500+
-                                    </h3>
-                                    <p className="text-xs text-slate-400">Animals</p>
-                                </div>
+          </div>
 
-                                <div>
-                                    <h3 className="text-xl font-bold text-amber-400">
-                                        100+
-                                    </h3>
-                                    <p className="text-xs text-slate-400">Sellers</p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-xl font-bold text-cyan-400">
-                                        24/7
-                                    </h3>
-                                    <p className="text-xs text-slate-400">Support</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex justify-center">
-                            <img
-                                src="https://images.unsplash.com/photo-1596733430284-f7437764b1a9?auto=format&fit=crop&w=600&q=80"
-                                alt="Qurbani Animal"
-                                className="w-full max-w-sm h-auto object-cover rounded-2xl shadow-xl border border-slate-700/50 hover:scale-[1.02] transition duration-500"
-                            />
-                        </div>
-                    </div>
-                </div>
+          {/* Stats */}
+          <div className="flex gap-6 mt-8 text-sm text-slate-600">
+            <div>
+              <p className="text-xl font-bold text-slate-800">500+</p>
+              Animals Listed
             </div>
-        </section>
-    );
+            <div>
+              <p className="text-xl font-bold text-slate-800">300+</p>
+              Happy Buyers
+            </div>
+            <div>
+              <p className="text-xl font-bold text-slate-800">100%</p>
+              Trusted Sellers
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT IMAGE */}
+        <div className="relative">
+
+          {/* Glow Background */}
+          <div className="absolute -top-10 -right-10 w-72 h-72 bg-purple-300/30 rounded-full blur-3xl"></div>
+
+          <div className="relative rounded-2xl overflow-hidden shadow-xl">
+            <Image
+              src="https://images.pexels.com/photos/28308873/pexels-photo-28308873.jpeg" // put your image in public folder
+              alt="Qurbani Animal"
+              width={600}
+              height={400}
+              className="w-full h-[350px] md:h-[420px] object-cover"
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+   
 };
 
 export default HeroSection;

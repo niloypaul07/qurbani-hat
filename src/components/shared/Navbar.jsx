@@ -112,8 +112,8 @@ const Navbar = () => {
                                      <Image
                                             src={user?.image || "/avatar.png"}
                                             alt="Profile"
-                                            width={25}
-                                            height={15}
+                                            width={20}
+                                            height={20}
                                             className="rounded-full border border-slate-200"
                                         />
                                 </Link>
