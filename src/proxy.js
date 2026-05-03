@@ -1,21 +1,21 @@
+import dns from "node:dns";
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 import { NextResponse } from "next/server";
 import { auth } from "./lib/auth";
+import { headers } from "next/headers";
 
 export async function proxy(request) {
     const session = await auth.api.getSession({
-        headers: request.headers,
+        headers: await headers(),
     });
+    console.log(session, "session");
 
-    const pathname = request.nextUrl.pathname;
-
-    
-    if (!session?.user) {
-        const loginUrl = new URL("/login", request.url);
-        return NextResponse.redirect("/login");
+    if (session) {
+        return NextResponse.next();
     }
 
-    
-    return NextResponse.next();
+    return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {
